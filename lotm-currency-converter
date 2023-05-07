@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url(https://static.wikia.nocookie.net/lord-of-the-mystery/images/0/08/Site-background-dark/revision/latest?cb=20221029080211) no-repeat;
+            background-size: cover;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+        a:link {
+            text-decoration: none;
+            color: #864caf;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        select {
+            font-family: 'Quicksand', sans-serif;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+            margin-bottom: 10px;
+            
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #864caf;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button.reset {
+            background-color: #BBB;
+        }
+        button:hover {
+            background-color: #4c1f6b;
+        }
+
+        #result {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+
+        .container {
+            text-align: center;
+            width: 600px;
+            height: 420px;
+            background-color: #ffffff;
+            position: relative;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 10px;
+            box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+        }
+        .left {
+            max-width: 50%;
+            height: 100%;
+            position: absolute;
+            box-sizing: border-box;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .right {
+            background-color: rgba(255, 255, 255, 0.4);
+            max-width: 50%;
+            float: right;
+            text-align: center;
+            padding: 50px 40px;
+            height: 100%;
+            box-sizing: border-box;
+            border-bottom-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    </style>
+    <script>
+            // Conversion function
+        function convertCurrency() {
+            const amount = document.getElementById("amount").value;
+            const fromCurrency = document.getElementById("fromCurrency").value;
+            const toCurrency = document.getElementById("toCurrency").value;
+
+            // Conversion rates
+            const poundToSoli = 20;
+            const poundToPenny = 1 / 240;
+            const poundToVerl = 24;
+            const poundToCoppet = 2400;
+            const poundToLick = 500;
+            const poundToLouis = 83.33;
+            const soliToPenny = 12;
+            const verlToCoppet = 1 / 100;
+            const verlToLouis = 1 / 20;
+            const verlToLick = 5;
+            const coppetToLick = 1 / 5;
+            const louisToLick = 400;
+
+            let result;
+
+            if (fromCurrency === toCurrency) {
+        result = "-";
+            } else if (fromCurrency === "Pound" && toCurrency === "Verl d'or") {
+                result = amount * poundToVerl;
+            } else if (fromCurrency === "Verl d'or" && toCurrency === "Pound") {
+                result = amount / poundToVerl;
+            } else if (fromCurrency === "Pound" && toCurrency === "Soli") {
+                result = amount * poundToSoli;
+            } else if (fromCurrency === "Soli" && toCurrency === "Pound") {
+                result = amount / poundToSoli;
+            } else if (fromCurrency === "Soli" && toCurrency === "Penny") {
+                result = amount * soliToPenny;
+            } else if (fromCurrency === "Penny" && toCurrency === "Soli") {
+                result = amount / soliToPenny;
+            } else if (fromCurrency === "Verl d'or" && toCurrency === "Coppet") {
+                result = amount * verlToCoppet;
+            } else if (fromCurrency === "Coppet" && toCurrency === "Verl d'or") {
+                result = amount / verlToCoppet;
+            } else if (fromCurrency === "Coppet" && toCurrency === "Lick") {
+                result = amount * coppetToLick;
+            } else if (fromCurrency === "Lick" && toCurrency === "Coppet") {
+                result = amount / coppetToLick;
+            } else if (fromCurrency === "Verl d'or" && toCurrency === "Louis d'or") {
+                result = amount / verlToLouis;
+            } else if (fromCurrency === "Louis d'or" && toCurrency === "Verl d'or") {
+                result = amount * verlToLouis;
+            } else if (fromCurrency === "Pound" && toCurrency === "Lick") {
+                result = amount * poundToLick;
+            } else if (fromCurrency === "Lick" && toCurrency === "Pound") {
+                result = amount / poundToLick;
+            } else if (fromCurrency === "Penny" && toCurrency === "Pound") {
+                result = amount * poundToPenny;
+            } else if (fromCurrency === "Pound" && toCurrency === "Penny") {
+                result = amount / poundToPenny;
+            } else if (fromCurrency === "Pound" && toCurrency === "Coppet") {
+            result = amount * poundToCoppet;
+            } else if (fromCurrency === "Coppet" && toCurrency === "Pound") {
+            result = amount * poundToCoppet;
+            } else if (fromCurrency === "Pound" && toCurrency === "Louis d'or") {
+                result = amount / poundToLouis;
+            } else if (fromCurrency === "Louis d'or" && toCurrency === "Pound") {
+                result = amount * poundToLouis;
+            } else if (fromCurrency === "Verl d'or" && toCurrency === "Lick") {
+                result = amount * verlToLick;
+            } else if (fromCurrency === "Lick" && toCurrency === "Verl d'or") {
+                result = amount * verlToLick;
+            } else if (fromCurrency === "Louis d'or" && toCurrency === "Lick") {
+                result = amount * louisToLick;
+            } else if (fromCurrency === "Lick" && toCurrency === "Louis d'or") {
+                result = amount * louisToLick;
+            } else {
+        result = "Invalid conversion";
+    }
+
+    document.getElementById("result").value = result === "-" ? result : result.toFixed(2);
+}
+       
+    //Swap!
+        function swapCurrencies() {
+        const fromCurrency = document.getElementById("fromCurrency").value;
+        const toCurrency = document.getElementById("toCurrency").value;
+        const amount = document.getElementById("amount").value;
+        const result = document.getElementById("result").value;
+
+        // Swap the currency dropdown values
+        document.getElementById("fromCurrency").value = toCurrency;
+        document.getElementById("toCurrency").value = fromCurrency;
+
+        // Swap the amount and result values
+        document.getElementById("amount").value = result;
+        document.getElementById("result").value = amount;
+        }
+    //Reset!
+        function resetFields() {
+        // Clear the input fields
+        document.getElementById("amount").value = "";
+        document.getElementById("result").value = "";
+        }
+    </script>
+<body>
+    <div class="container">
+    <div class="left"><h2><a href="https://lordofthemysteries.fandom.com"><abbr title="Lord of Mysteries"><i>LOTM's</i></abbr></a> Currency Converter</h2>
+        .
+    <p><i><small>For more information, See <a href="https://lordofthemysteries.fandom.com/wiki/Currency">"Currency" on fandom wiki</a></i></small></p>
+    </div>
+    <div class="right">
+    <label for="amount"></label>
+    <input type="number" id="amount" placeholder="Amount">
+    
+    <label for="fromCurrency"></label>
+    <select id="fromCurrency">
+        <optgroup label="Loen Kingdom">
+            <option value="Pound" selected="selected">Pound</option>
+            <option value="Soli">Soli</option>
+            <option value="Penny">Penny</option>
+        </optgroup>
+        <optgroup label="Intis Kingdom">
+            <option value="Verl d'or">Verl d'or</option>
+            <option value="Coppet">Coppet</option>
+            <option value="Lick">Lick</option>
+            <option value="Louis d'or">Louis d'or</option>
+        </optgroup>
+    </select>
+    <br>
+    <button onclick="convertCurrency()" title="Convert"><i class="fas fa-coins"></i> Convert</button>
+    <button class="swap-button" onclick="swapCurrencies()" title="Swap"><i class="fas fa-exchange-alt"></i></button>
+    
+    <label for="result"></label>
+    <input type="number" id="result" readonly placeholder="Result">
+    <label for="toCurrency"></label>
+    <select id="toCurrency">
+        <optgroup label="Loen Kingdom">
+            <option value="Pound">Pound</option>
+            <option value="Soli">Soli</option>
+            <option value="Penny">Penny</option>
+        </optgroup>
+        <optgroup label="Intis Kingdom">
+            <option value="Verl d'or" selected="selected">Verl d'or</option>
+            <option value="Coppet">Coppet</option>
+            <option value="Lick">Lick</option>
+            <option value="Louis d'or">Louis d'or</option>
+        </optgroup>
+    </select>
+    <button class="reset" onclick="resetFields()" title="Reset"><i class="fas fa-undo"></i> Reset</button>
+    
+    </div>
+    </div>
+</body>
+</html>
